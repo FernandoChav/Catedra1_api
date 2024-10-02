@@ -8,7 +8,10 @@ namespace Catedra1.src.DTOs
     public class UserDto
     {
         [Required]
-        [StringLength (100, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 100 characters")]
+        public string Rut {get;set;} = string.Empty;
+
+        [Required]
+        [StringLength (100, MinimumLength = 3, ErrorMessage = "El nombre debe tener minimo 3 y maximo 100 caracteres")]
         public string Name { get; set; } = string.Empty;
         [Required]
         [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "El correo electrónico no es válido")]
