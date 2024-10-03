@@ -19,7 +19,7 @@ namespace Catedra1.src.repositories
             _context = context;
         }
 
-        public async Task CreateUser(UserDto userDto)
+        public async Task<User> CreateUser(UserDto userDto)
         {
 
             if (await ExistAsync(userDto.Rut))
@@ -41,6 +41,7 @@ namespace Catedra1.src.repositories
             };
             await _context.Users.AddAsync(userEntity);
             await _context.SaveChangesAsync();
+            return userEntity;
         }
 
         public async Task<IEnumerable<UserDto>> GetUsers()
@@ -61,7 +62,7 @@ namespace Catedra1.src.repositories
             
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id  == id);
 
-            if (user == null) return ;
+            if (user == null) throw new ArgumentException("El usuario no encontrado.");
 
             user.Rut = userDto.Rut;
             user.Name = userDto.Name;
@@ -95,9 +96,9 @@ namespace Catedra1.src.repositories
         {
             return await _context.Users.AnyAsync(u => u.Id == id);
         }
-        public async Task<UserDto> GetUserById(int id)
+        public async Task<UserDto> GetUserByRut(string rut)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Rut == rut);
 
             if (user == null) return null;
 

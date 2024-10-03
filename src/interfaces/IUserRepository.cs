@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Catedra1.src.DTOs;
+using Catedra1.src.models;
 namespace Catedra1.src.interfaces
 {
     public interface IUserRepository
     {
         Task<IEnumerable<UserDto>> GetUsers();
 
-        Task CreateUser(UserDto userDto);
+        Task<User> CreateUser(UserDto userDto);
 
         Task DeleteUser(int id);
 
@@ -19,6 +20,6 @@ namespace Catedra1.src.interfaces
 
         Task<bool> ExistIDAsync(int id);
 
-        Task<UserDto> GetUserById(int id);
+        Task<UserDto> GetUserByRut(string rut);
     }   
 }

@@ -19,7 +19,7 @@ namespace Catedra1.src.models
         [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "El correo electrónico no es válido")]
         public string Email { get; set; } = string.Empty;
         [Required]
-        [RegularExpression("^(masculino|femenino|otro)$", ErrorMessage = "Los generos permitidos son: 'masculino', 'femenino' o 'otro'.")]
+        [RegularExpression("^(masculino|femenino|otro|prefiero no decirlo)$", ErrorMessage = "Los generos permitidos son: 'masculino', 'femenino' o 'otro'.")]
         public string Gender { get; set; } = string.Empty;
         [Required]
         public DateOnly Birthdate { get; set; } = new DateOnly();
