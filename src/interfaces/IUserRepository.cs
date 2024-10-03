@@ -11,9 +11,9 @@ namespace Catedra1.src.interfaces
 
         Task CreateUser(UserDto userDto);
 
-        Task DeleteUser(string rut);
+        Task DeleteUser(int id);
 
-        Task UpdateUser(string Rut, UserDto userDto);
+        Task UpdateUser(int id, UserDto userDto);
 
         Task<bool> ExistAsync(string rut);
     }   
