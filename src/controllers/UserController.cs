@@ -24,9 +24,9 @@ namespace Catedra1.src.controllers
         {
             try
             {
-                // Llama al método CreateUser del repositorio
+                
                 await _userRepository.CreateUser(userDto);
-                return CreatedAtAction(nameof(GetUserById), new { id = userDto.Rut }, userDto); // Devuelve 201 Created
+                return CreatedAtAction(nameof(_userRepository.GetUserById), new { id = userDto.Rut }, userDto); // Devuelve 201 Created
             }
             catch (ArgumentException ex)
             {
