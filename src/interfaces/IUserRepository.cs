@@ -16,5 +16,9 @@ namespace Catedra1.src.interfaces
         Task UpdateUser(int id, UserDto userDto);
 
         Task<bool> ExistAsync(string rut);
+
+        Task<bool> ExistIDAsync(int id);
+
+        Task<UserDto> GetUserById(int id);
     }   
 }

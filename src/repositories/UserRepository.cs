@@ -95,5 +95,20 @@ namespace Catedra1.src.repositories
         {
             return await _context.Users.AnyAsync(u => u.Id == id);
         }
+        public async Task<UserDto> GetUserById(int id)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+
+            if (user == null) return null;
+
+            return new UserDto
+            {
+                Rut = user.Rut,
+                Name = user.Name,
+                Email = user.Email,
+                Gender = user.Gender,
+                Birthdate = user.Birthdate
+            };
+        }
     }
 }
