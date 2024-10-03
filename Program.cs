@@ -1,4 +1,6 @@
 using Catedra1.src.data;
+using Catedra1.src.interfaces;
+using Catedra1.src.repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => 
 {    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<IUserRepository,UserRepository>();
+builder.Services.AddControllers();
 var app = builder.Build();
 using (var scope  = app.Services.CreateScope())
 {
@@ -29,6 +34,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
+app.MapControllers();
 app.Run();
 
