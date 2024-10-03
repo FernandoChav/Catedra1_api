@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "d6959cb2-32cc-4d7b-ae11-e92d57505b95",
+		"name": "Catedra 1",
+		"description": "StartFragment\n\n### Crear un nuevo usuario\n\n- **Método**: `POST`\n    \n- **URL**: `http://localhost:/api/user`\n    \n- **Descripción**: Crea un nuevo usuario en el sistema.\n    \n- **Cuerpo de la solicitud** (JSON):\n    \n- {  \n    \"rut\": \"12345678-9\",  \n    \"name\": \"Juan Pérez\",  \n    \"email\": \"[juan.perez@example.com](https://mailto:juan.perez@example.com)\",  \n    \"gender\": \"masculino\",  \n    \"birthdate\": \"1990-01-01\"  \n    }\n    \n\nRespuesta esperada:\n\n{  \n\"message\": \"Usuario creado exitosamente\",  \n\"user\": {  \n\"rut\": \"12345678-9\",  \n\"name\": \"Juan Pérez\",  \n\"email\": \"[juan.perez@example.com](https://mailto:juan.perez@example.com)\",  \n\"gender\": \"masculino\",  \n\"birthdate\": \"1990-01-01\"  \n}  \n\nStartFragment\n\n### Obtener todos los usuarios\n\n- **Método**: `GET`\n    \n- **URL**: `http://localhost:/api/user`\n    \n- **Descripción**: Obtiene una lista de todos los usuarios en el sistema.\n    \n- **Parámetros opcionales**:\n    \n    - **`sort`**: (opcional) Puede ser `asc` o `desc` para ordenar la lista.\n        \n    - **`gender`**: (opcional) Filtra por género (`masculino`, `femenino`, `otro`, `prefiero no decirlo`).\n        \n- bashCopiar códigoGET http://localhost:5000/api/user?sort=asc&gender=masculino\n    \n- jsonCopiar código\\[ { \"rut\": \"12345678-9\", \"name\": \"Juan Pérez\", \"email\": \"juan.perez@example.com\", \"gender\": \"masculino\", \"birthdate\": \"1990-01-01\" }, { \"rut\": \"98765432-1\", \"name\": \"Ana Gómez\", \"email\": \"ana.gomez@example.com\", \"gender\": \"femenino\", \"birthdate\": \"1985-05-15\" }\\]\n    \n\n---\n\n### 3\\. Actualizar un usuario existente\n\n- **Método**: `PUT`\n    \n- **URL**: `http://localhost:/api/user/{id}`\n    \n- **Descripción**: Actualiza la información de un usuario existente.\n    \n- jsonCopiar código{ \"rut\": \"12345678-9\", \"name\": \"Juan Pérez Actualizado\", \"email\": \"juan.perez.updated@example.com\", \"gender\": \"masculino\", \"birthdate\": \"1990-01-01\"}\n    \n- bashCopiar códigoPUT http://localhost:5000/api/user/1\n    \n- jsonCopiar código{ \"message\": \"Usuario actualizado exitosamente.\"}\n    \n\n---\n\n### 4\\. Eliminar un usuario\n\n- **Método**: `DELETE`\n    \n- **URL**: `http://localhost:/api/user/{id}`\n    \n- **Descripción**: Elimina un usuario del sistema.\n    \n- bashCopiar códigoDELETE http://localhost:5000/api/user/1\n    \n- jsonCopiar código{ \"message\": \"Usuario eliminado exitosamente.\"}\n    \n\nEndFragment  \n  \n\nEndFragment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34959432"
+	},
+	"item": [
+		{
+			"name": "Get data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/info?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"info"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Post data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/info",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"info"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Update data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/info?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"info"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/info?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"info"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
